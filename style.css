@@ -1,8 +1,4 @@
-/* ===========================
-   Общие стили: базовая нормализация и поведение элементов
-   - Сбрасываем отступы, включаем box-sizing
-   - Устанавливаем фон, цвет и шрифт для всей страницы
-   =========================== */
+/* Общие стили */
 * {
   margin: 0;
   padding: 0;
@@ -16,10 +12,7 @@ body, html {
   height: auto; /* убрали 100% */
 }
 
-/* ===========================
-   Контейнер страницы
-   - Центральный ограничитель ширины, паддинги и вертикальная верстка
-   =========================== */
+/* Контейнер */
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -28,27 +21,15 @@ body, html {
   flex-direction: column;
 }
 
-/* ===========================
-   Шапка сайта (header)
-   - Фон, скругления, выравнивание контента, логотип/аватар и тексты
-   - .header-content, .header-text — внутри шапки
-   =========================== */
+/* Шапка сайта */
 header {
-  /* Тёмно-синий градиент */
-  background: linear-gradient(135deg, #0f1d3a, #1a3d7e);
-
-  /* Лёгкий объём */
-  box-shadow: 
-      0 4px 15px rgba(0, 0, 0, 0.4),       /* нижняя тень */
-      inset 0 2px 4px rgba(255, 255, 255, 0.08); /* внутренний блик */
-
+  background-color: #1a3d7e;
   color: white;
-  border-radius: 18px;
+  border-radius: 20px;
   display: flex;
   align-items: center;
-  padding: 25px;
-  margin-bottom: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.06); /* лёгкая рамка */
+  padding: 20px;
+  margin-bottom: 20px; /* Отступ между шапкой и меню */
 }
 
 .header-content {
@@ -62,44 +43,32 @@ header {
   color: white;
 }
 
-/* Заголовок */
-header h1 {
-  margin: 0;
-  font-size: 2.5em;
-  font-weight: 800;
-  letter-spacing: 1px;
-}
-
-/* Подзаголовок */
+header h1,
 header p {
-  margin: 5px 0 0 0;
-  font-size: 1.2em;
-  opacity: 0.9;
+  margin: 0;
+  color: white;
 }
 
-/* Аватар */
+header h1 {
+  font-size: 2.5em;
+  font-weight: bold;
+}
+
+header p {
+  font-size: 1.2em;
+  font-style: italic;
+  margin-top: 5px;
+}
+
 .header-img {
-  width: 70px;        /* уменьшил */
-  height: 70px;       /* уменьшил */
+  width: 100px;
+  height: 100px;
   object-fit: cover;
   border-radius: 50%;
-  margin-right: 5px;
-
-  /* мягкий объём */
-  box-shadow: 0 3px 10px rgba(0,0,0,0.35);
-  border: 2px solid rgba(255, 255, 255, 0.15);
-
-  /* лёгкое смещение вниз (выравнивание по тексту) */
-  transform: translateY(2px);
+  margin-right: 20px;
 }
 
-
-
-
-/* ===========================
-   Навигация (nav)
-   - Горизонтальный список ссылок с фоновой панелью и стилями hover/active
-   =========================== */
+/* Навигация */
 nav ul {
   list-style: none;
   display: flex;
@@ -124,147 +93,68 @@ nav a {
   transition: background-color 0.3s, color 0.3s;
 }
 
-/* Состояние ссылки при наведении и активная вкладка */
 nav a:hover,
 nav a.active {
   background-color: #4285f4;
   color: white;
 }
 
-/* ===========================
-   Основной контент (main и .page-content)
-   - Вертикальная область контента, переключаемые страницы
-   =========================== */
-/* Обёртка основного контента выглядит как лист */
-.page-content {
-  flex: 1 0 auto;
-  padding: 35px 35px;
-  margin: 40px auto 20px auto; /* поднимаем лист чуть ниже */
-  width: min(1000px, 92%);    /* шире лист */
-  
-  background: #ffffff;
-  border-radius: 22px;
-  box-shadow: 0 10px 26px rgba(0,0,0,0.10);
-  display: block;
+/* Основной контент */
+main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Скрываем неактивные страницы */
+.page-content {
+  flex: 1 0 auto;
+  padding: 20px 0; /* можешь менять */
+  margin: 0;
+}
+
 .page-content:not(.active) {
   display: none;
 }
 
-/* Заголовки */
-.page-content h1 {
+
+h1 {
   font-size: 2em;
-  margin-bottom: 15px;
 }
 
-/* Обычный текст */
-.page-content p {
-  font-size: 1.15em;
-  line-height: 1.7;
-  color: #444;
-  margin-bottom: 15px;
-}
-/* Плашка для всех страниц кроме главной */
-/* Заголовок поднимаем НАД листочком */
-.page-content h1:not(.home-quote) {
-  background: linear-gradient(135deg, #052046, #093671);
-  color: #e8eef9;
-  padding: 14px 28px;
-  border-radius: 18px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
-  display: inline-block;
-
-  font-size: 1.45em;
-  font-weight: 600;
-
-  position: relative;
-  top: -55px;        /* подняли выше чем было */
-  left: 10px;        /* чуть смещаем чтобы выглядело красиво */
-  margin-bottom: -25px;
-
-  z-index: 5;
+p {
+  font-size: 1.2em;
+  line-height: 1.6;
 }
 
-/* ===========================
-   Карточки услуг (.service-card)
-   - Внешний вид карточек, тень, скругления, hover-эффект
-   =========================== */
+/* Карточки услуг */
 .service-card {
   background-color: #ffffff;
-  border-radius: 15px; /* Увеличим радиус скругления для более плавных углов */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Мягкая тень с более выраженным эффектом */
-  padding: 25px; /* Увеличиваем отступы для лучшего восприятия */
-  margin-bottom: 25px; /* Немного больше отступа снизу */
-  min-height: 180px; /* Минимальная высота карточки */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  min-height: 150px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  transition: box-shadow 0.3s ease, transform 0.3s ease; /* Плавные анимации */
 }
 
-/* Заголовок карточки */
 .service-card h2 {
   color: #4285f4;
-  font-size: 1.5em;
-  font-weight: 700; /* Увеличиваем толщину шрифта для заголовка */
-  margin-bottom: 15px; /* Добавляем отступ снизу */
-  letter-spacing: 0.5px; /* Немного увеличиваем расстояние между буквами */
-  transition: color 0.3s ease; /* Плавный переход цвета */
+  margin-bottom: 10px;
 }
 
-/* Текст в карточке */
 .service-card p {
   color: #555;
-  line-height: 1.8; /* Увеличиваем межстрочный интервал для лучшей читаемости */
-  font-size: 1.1em; /* Увеличиваем размер шрифта для текста */
-  margin-bottom: 15px; /* Добавляем отступ снизу */
+  line-height: 1.6;
 }
 
-/* Стили при наведении */
 .service-card:hover {
-  transform: translateY(-5px); /* Карточка немного поднимется */
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2); /* Увеличиваем тень при наведении */
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
 }
 
-/* Псевдокласс для активного состояния заголовка */
-.service-card:hover h2 {
-  color: #1a3d7e; /* Меняем цвет заголовка при наведении */
-}
-
-/* ===========================
-   Стили для кнопок внутри карточки
-   =========================== */
-.service-card .btn {
-  background-color: #4285f4; /* Цвет кнопки, соответствующий теме */
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 30px; /* Скругление кнопки */
-  font-weight: 600;
-  cursor: pointer;
-  text-align: center;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  align-self: flex-start; /* Выравнивание кнопки по левому краю */
-  margin-top: auto; /* Позиционируем кнопку внизу карточки */
-}
-
-/* Состояние кнопки при наведении */
-.service-card .btn:hover {
-  background-color: #357ae8; /* Более темный оттенок при наведении */
-  transform: translateY(-2px); /* Поднимем кнопку немного */
-}
-
-/* Для улучшения читаемости текста */
-.service-card p:last-child {
-  margin-bottom: 0; /* Убираем лишний отступ снизу */
-}
-
-/* ===========================
-   Вступительный текст (.intro-text)
-   - Блок с фоном, скруглениями и тенью для заметного вступления
-   =========================== */
+/* Вступительный текст */
 .intro-text {
   margin-bottom: 20px;
   font-size: 1.2em;
@@ -289,10 +179,7 @@ nav a.active {
   font-style: italic;
 }
 
-/* ===========================
-   Контакты (.contact-info и дочерние)
-   - Вертикальный стек контактных пунктов, иконки мессенджеров и ссылки
-   =========================== */
+/* Контакты */
 .contact-info {
   display: flex;
   flex-direction: column;
@@ -307,7 +194,6 @@ nav a.active {
   gap: 15px;
 }
 
-/* Иконка мессенджера — круглая, с hover-эффектом */
 .messenger-icon {
   width: 40px;
   height: 40px;
@@ -321,7 +207,6 @@ nav a.active {
   transform: scale(1.1);
 }
 
-/* Текст контакта и ссылки */
 .contact-item span {
   font-size: 16px;
   font-weight: 500;
@@ -346,75 +231,30 @@ nav a.active {
   color: #4285f4;
   text-decoration: underline;
 }
-/* Контейнер одной контактной ссылки */
-.contact-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 15px; /* Отступ между элементами */
-}
 
-/* Иконка остаётся отдельно */
-.messenger-icon {
-  width: 50px;
-  height: 50px;
-  object-fit: contain;
-}
-
-/* Плашка вокруг текста */
-.contact-link {
-  display: inline-block;
-  background: #f1f1f1;       /* светло-серая плашка */
-  padding: 10px 16px;
-  border-radius: 30px;       /* скругление */
-  font-size: 1.05em;
-  font-weight: 500;
-  color: #333;
-  text-decoration: none;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
-  transition: background 0.25s, transform 0.2s;
-}
-
-/* Ховер эффект */
-.contact-link:hover {
-  background: #e4e4e4;
-  transform: translateY(-2px);
-}
-
-/* ===========================
-   Блок проектов (.projects-text)
-   - Секция с фоном и списком проектов
-   =========================== */
+/* Проекты */
 .projects-text {
-  background-color: #f9f9f9;          /* светлый фон */
-  padding: 20px 25px;                 /* ровные внутренние отступы */
-  border-radius: 15px;                /* более закруглённые края */
-  box-shadow: 0 6px 15px rgba(0,0,0,0.08); /* мягкая тень */
-  line-height: 1.6;                   /* чуть плотнее для читаемости */
+  background-color: #f9f9f9;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  line-height: 1.7;
   font-size: 1.1em;
   color: #333;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;                          /* одинаковые отступы между элементами */
 }
 
-/* Список внутри блока */
 .projects-text ul {
-  margin: 0;
-  padding-left: 20px;                 /* ровный отступ слева для маркеров */
+  margin: 15px 0 20px 25px;
+  padding: 0;
   list-style-type: disc;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;                           /* равные отступы между элементами списка */
 }
 
 .projects-text li {
-  margin: 0;                          /* убираем лишние маргины */
+  margin-bottom: 8px;
 }
 
-/* Стилизация сильного и курсивного текста */
 .projects-text strong {
-  color: #1a3d7e;                     /* цвет заголовков внутри текста */
+  color: #1a3d7e;
 }
 
 .projects-text em {
@@ -422,45 +262,39 @@ nav a.active {
   font-style: italic;
 }
 
-/* ===========================
-   Страница home (#home)
-   - Специфичные стили для главной страницы: ширина, отступы, выравнивание
-   =========================== */
-/* ===========================
-   Стиль для главной страницы (как лист с тенью)
-   =========================== */
+/* Страница home */
 #home {
-  background: #fff;
-  border-radius: 20px; /* Скругление углов */
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Мягкая тень снизу */
-  padding: 40px;
-  margin: -20px auto 20px; /* Подняли блок на 30px вверх */
   max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  line-height: 1.8;
   font-size: 1.1em;
   color: #333;
-  line-height: 1.8;
-  position: relative;
-  z-index: 1;
+}
+
+#home p {
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+#home strong {
+  color: #1a3d7e;
+  font-weight: bold;
+}
+
+#home em {
+  color: #555;
+  font-style: italic;
 }
 
 #home h1 {
   text-align: center;
   color: #1a3d7e;
-  font-size: 2em;
-  margin-bottom: 20px;
+  font-size: 1.6em;
+  margin-bottom: 25px;
 }
 
-
-/* Для добавления анимации тени */
-#home:hover {
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15); /* Слегка увеличиваем тень на hover */
-}
-
-
-/* ===========================
-   Отзывчивость / медиазапросы
-   - Переключение лейаута для планшетов и телефонов
-   =========================== */
+/* ===== Мобильная версия ===== */
 @media (max-width: 1024px) {
   .container {
     padding: 10px;
@@ -541,64 +375,34 @@ nav a.active {
     padding: 8px 15px;
   }
 }
-
-/* ===========================
-   Главная цитата (.home-quote)
-   - Стили для цитаты/врезки на главной странице
-   =========================== */
+/* Главная цитата */
 .home-quote {
-  font-family: 'Montserrat', sans-serif; /* прямой шрифт */
-  font-weight: 700;
-  font-size: 4.5em;  /* размер можно подкорректировать */
-  color: #1a3d7e;    /* синий из палитры сайта */
-  text-align: center;
-  line-height: 1.2;
-  margin-top:1px;  /* чуть выше */
-  margin-bottom: 20px;
+  text-align: right;   /* сдвигаем вправо */
+  font-style: italic;  /* делаем курсивом */
+  color: #1a3d7e;      /* оставляем цвет как у заголовков */
+  font-size: 0.5em;    /* размер шрифта, можно изменить */
+  margin-bottom: 10px;
 }
-
 
 .home-quote span {
   font-size: 0.9em;    /* размер для пояснения */
   color: #555;
 }
-
-/* ===========================
-   Кнопка поддержки / донат (.donate-block, .donate-btn)
-   - Выделенная кнопка с тенью и hover-эффектом
-   =========================== */
-.donate-block {
-  text-align: center;
-  margin-top: 18px;
-}
-
+/* Кнопка поддержки */
+.donate-block { text-align:center; margin-top:18px; }
 .donate-btn {
-  background: #4285f4;
-  color: #fff;
-  padding: 12px 24px; /* Скруглённая плашка*/
-  border-radius: 24px; /* Скругленные края */
-  border: none;
-  font-weight: 700;
-  cursor: pointer;
-  box-shadow: 0 4px 10px rgba(66, 133, 244, 0.25);
-  transition: all 0.3s ease; /* Плавный переход */
+  background:#4285f4;
+  color:#fff;
+  padding:10px 18px;
+  border-radius:10px;
+  border:none;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 4px 10px rgba(66,133,244,0.25);
 }
+.donate-btn:hover{ transform:translateY(-2px); }
 
-.donate-btn:hover {
-  transform: translateY(-3px) scale(1.05); /* Легкое поднятие и увеличение */
-  box-shadow: 0 6px 18px rgba(66, 133, 244, 0.4); /* Яркая тень */
-  background: #357ae8; /* Немного темнее при наведении */
-}
-
-.donate-btn:active {
-  transform: translateY(1px) scale(1); /* Эффект нажатия */
-  box-shadow: 0 3px 8px rgba(66, 133, 244, 0.3);
-}
-
-/* ===========================
-   Модальные окна (.modal и .modal-content)
-   - Центрирование, затемнение фона, видимость по aria-hidden
-   =========================== */
+/* Модал */
 .modal {
   position:fixed;
   inset:0;
@@ -608,7 +412,6 @@ nav a.active {
   background:rgba(0,0,0,0.45);
   z-index:9999;
 }
-/* Когда modal имеет aria-hidden="false" — показываем */
 .modal[aria-hidden="false"]{ display:flex; }
 
 .modal-content {
@@ -622,7 +425,6 @@ nav a.active {
   font-family:inherit;
 }
 
-/* Кнопка закрытия модала (крестик) */
 .modal-close {
   position:absolute;
   right:12px;
@@ -633,26 +435,12 @@ nav a.active {
   cursor:pointer;
 }
 
-/* ===========================
-   Блок карточки карты/данных в модале (.card-box и внутренние)
-   - Стиль для отображения номера карты
-   =========================== */
-.case-card {
-  background: #f7f9ff;
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 20px;
-
-  /* Эффект выпуклого объема */
-  box-shadow: 
-    6px 6px 15px rgba(0,0,0,0.15),
-    -6px -6px 15px rgba(255,255,255,0.9),
-    inset 0 0 5px rgba(0,0,0,0.02);
-
-  transition: all 0.3s ease;
+.card-box {
+  background:#f7f9ff;
+  padding:12px;
+  border-radius:8px;
+  margin-top:10px;
 }
-
-
 .card-label { font-size:13px; color:#666; margin-bottom:6px; }
 .card-number {
   font-size:20px;
@@ -678,24 +466,6 @@ nav a.active {
 .qr-section img { width:180px; height:180px; border-radius:8px; background:#fff; padding:6px; box-shadow:0 6px 14px rgba(0,0,0,0.08); }
 
 .note { font-size:13px; color:#666; margin-top:10px; }
-
-/* ===========================
-   Контейнер карточек кейсов (.case-cards-container)
-   - Список карточек кейсов/кейсов — вертикальный стек с отступами
-   =========================== */
-.case-cards-container {
-  display: flex;
-  flex-direction: column; /* Вертикальное расположение карточек */
-  gap: 20px; /* Отступы между карточками */
-  padding: 20px;
-  margin-top: 20px;
-}
-
-/* ===========================
-   Каждая карточка кейса (.case-card)
-   - Базовый внешний вид, тень, скругления, поведение при раскрытии
-   =========================== */
-/* === Карточка === */
 /* === Контейнер карточек === */
 .case-cards-container {
   display: flex;
@@ -709,23 +479,17 @@ nav a.active {
 .case-card {
   position: relative;
   overflow: hidden;
-  background: #f7f9ff; /* чуть светлее для объёма */
-  border: 1px solid #ffffff; /* можно оставить, либо убрать */
+  background: #fff;
+  border: 1px solid #dcdcdc;
   padding: 20px;
   margin-bottom: 20px;
   border-radius: 12px;
-
-  /* Выпуклый эффект */
-  box-shadow: 
-    6px 6px 15px rgba(0,0,0,0.15),   /* тень справа и снизу */
-    -6px -6px 15px rgba(255,255,255,0.9), /* светлая блик-тень слева и сверху */
-    inset 0 0 5px rgba(0,0,0,0.02);   /* очень лёгкий внутренний объём */
-
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   transition: all 0.4s ease;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  height: auto;
+  flex-direction: column; /* Все элементы внутри карточки идут по вертикали */
+  justify-content: flex-start; /* Элементы будут располагаться сверху */
+  height: auto; /* Убираем фиксированную высоту */
 }
 
 /* Когда карточка раскрыта */
@@ -809,154 +573,4 @@ nav a.active {
 
 .situation-text.expanded::-webkit-scrollbar {
   display: none; /* Для Chrome, Safari, Edge скрывает прокрутку */
-}
-/* ========== Навигация с эффектами ========== */
-nav {
-  margin-bottom: 12px;
-  display: block;
-}
-
-nav ul {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 28px;
-  padding: 10px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-}
-
-nav li {
-  margin: 0;
-}
-
-nav a {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 20px;
-  border-radius: 18px;
-  color: #333;
-  font-weight: 700;
-  text-decoration: none;
-  transition: transform .16s ease, background-color .18s ease, color .18s ease;
-  position: relative;
-}
-
-nav a::before {
-  content: "";
-  width: 8px;
-  height: 8px;
-  border-radius: 2px;
-  display: inline-block;
-  background: linear-gradient(45deg, #7aa7ff, #2b6bff);
-}
-
-/* Hover / active */
-nav a:hover {
-  transform: translateY(-3px);
-  background: linear-gradient(90deg, #eef6ff, #f6fbff);
-  color: #0f2a55;
-}
-
-nav a.active {
-  background: linear-gradient(90deg, #1a73e8, #2b6bff);
-  color: white;
-  box-shadow: 0 6px 16px rgba(42, 103, 255, 0.18);
-}
-
-/* ========== Дополнительная плашка с действиями ========== */
-.nav-hero {
-  margin: 6px 0 18px;
-  padding: 18px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  border-radius: 16px;
-  background: linear-gradient(135deg, #0f1d3a, #1a3d7e);
-  color: white;
-  box-shadow: 0 8px 30px rgba(10, 25, 60, 0.28), inset 0 2px 6px rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.nav-hero .hero-left {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.nav-hero .hero-left h2 {
-  margin: 0;
-  font-size: 1.15rem;
-  font-weight: 800;
-  letter-spacing: 0.6px;
-}
-
-.nav-hero .hero-left p {
-  margin: 0;
-  opacity: 0.9;
-  font-size: 0.95rem;
-}
-
-.nav-hero .hero-actions {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
-.nav-hero .cta {
-  background: linear-gradient(90deg, #57a0ff, #276bff);
-  color: white;
-  padding: 10px 16px;
-  border-radius: 12px;
-  font-weight: 800;
-  box-shadow: 0 8px 20px rgba(39, 107, 255, 0.25);
-  border: none;
-  cursor: pointer;
-  transition: transform 0.16s ease, box-shadow 0.16s ease;
-}
-
-.nav-hero .cta:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 28px rgba(39, 107, 255, 0.28);
-}
-
-.nav-hero .ghost {
-  background: transparent;
-  color: rgba(255, 255, 255, 0.92);
-  padding: 8px 12px;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  cursor: pointer;
-  transition: background 0.12s ease, transform 0.12s ease;
-}
-
-.nav-hero .ghost:hover {
-  background: rgba(255, 255, 255, 0.04);
-  transform: translateY(-2px);
-}
-
-/* ========== Адаптивность для мобильных устройств ========== */
-@media (max-width: 768px) {
-  nav ul {
-    padding: 6px;
-    gap: 8px;
-  }
-  nav a {
-    padding: 8px 12px;
-    font-size: 0.95rem;
-  }
-
-  .nav-hero {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 12px;
-    padding: 14px;
-  }
-
-  .nav-hero .hero-actions {
-    justify-content: center;
-  }
 }

@@ -73,6 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --- 📖 ФУНКЦИЯ РАЗВОРАЧИВАНИЯ ТЕКСТА ---
+ 
+  // --- 📖 ФУНКЦИЯ РАЗВОРАЧИВАНИЯ ТЕКСТА ---
   const cards = document.querySelectorAll('.case-card');
 
   cards.forEach(card => {
@@ -98,13 +100,6 @@ document.addEventListener('DOMContentLoaded', () => {
         card.style.maxHeight = fullHeight + 40 + 'px'; // Добавляем немного для кнопки и отступов
 
         toggleBtn.innerHTML = '▲ Свернуть';
-        // Показываем кнопку "Подробнее" плавно
-      if (btn) {
-        setTimeout(() => {
-          btn.style.opacity = 1;
-        }, 200); // Ускорим проявление
-      }
-    
       } else {
         // Сворачиваем обратно
         situationText.style.transition = 'max-height 0.4s ease';
@@ -112,10 +107,6 @@ document.addEventListener('DOMContentLoaded', () => {
         card.style.maxHeight = '180px';
 
         toggleBtn.innerHTML = '▼ Развернуть';
-         // Скрываем кнопку "Подробнее"
-      if (btn) {
-        btn.style.opacity = 0;
-      }
       }
     });
 
