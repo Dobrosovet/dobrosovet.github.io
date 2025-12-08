@@ -130,3 +130,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+// --- Функция для переключения вкладок ---
+function showPage(pageId, event) {
+  event.preventDefault();
+
+  // Убираем active со всех вкладок
+  document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+  event.target.classList.add('active');
+
+  // Убираем active со всех страниц
+  document.querySelectorAll('.page-content').forEach(page => page.classList.remove('active'));
+
+  // Добавляем active нужной странице
+  const page = document.getElementById(pageId);
+  page.classList.add('active');
+}
+
