@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<link rel="icon" href="Dobro.png" type="image/png" sizes="32x32">  
-<meta charset="UTF-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ДоброСовѣтъ</title>
-  <link rel="stylesheet" href="style.css">
+  <title>ДоброСовѣтъ - Ситуация 1</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="icon" href="{{ url_for('static', filename='Dobro.png') }}" type="image/png" sizes="32x32">
   <style>
     .page-content {
       padding-bottom: 40px;
@@ -60,7 +60,7 @@
   <div class="container">
     <header>
       <div class="header-content">
-        <img src="sova.png" alt="Фото" class="header-img">
+      <img src="{{ url_for('static', filename='img/sova.png') }}" alt="Фото" class="header-img">
         <div class="header-text">
           <h1>ДоброСовѣтъ</h1>
           <p>Правозащитный центр добрых людей</p>
@@ -70,19 +70,19 @@
 
     <!-- Подробное описание ситуации -->
     <main>
-      <section style="display:flex; justify-content:center; margin-top: 30px;">
-        <div style="
-          background-color: #ffffff; 
-          padding: 20px 25px; 
-          max-width: 800px; 
-          border-radius: 15px; 
-          box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
-          text-align: left;
-          line-height: 1.6;
-          font-size: 16px;
-        ">
+   <section style="display:flex; justify-content:center; margin-top: 30px;">
+  <div style="
+        background-color: #ffffff; 
+        padding: 20px 25px; 
+        max-width: 800px; 
+        border-radius: 15px; 
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+        text-align: left;
+        line-height: 1.6;
+        font-size: 16px;
+      ">
           <p>Многим жителям Выборга известно, какая жестокая трагедия произошла в августе 2021 года в семье известного реставратора Валерия Кожухаря. Ситуация оказалась трагичной не только для семьи Валерия и Ариадны, но и для всего общества в целом, поскольку вседозволенность и беспринципность иных, граничащая с беззаконием – суть катастрофы, произошедшей в Выборге и за его пределами – поставило под удар руководителей предприятий, магазинов, общепита Выборга и Выборгского района Ленинградской области. Тогда же внезапное несанкционированное вторжение посторонних лиц обрушило бизнес, подкосило здоровье, бросило тень на репутацию, а затем отняло и саму жизнь. Мир потерял талантливого реставратора. И СМИ сыграли не последнюю роль во втаптывании в грязь авторитетной семьи. Искусственный интеллект агрегаторов СМИ сделал свое черное дело, раздув гипотезу о нападении до невообразимых размеров. И судьи, вероятно, использовали тексты СМИ для обвинительных приговоров. Люди, которые казались друзьями, в одночасье стали безучастными мимо прошедшими прохожими. Жаль, что тогда Семье никто не помог.</p>
-          <img src="events/event7.jpg" class="event-photo" alt="Событие 7">
+          <img src="{{ url_for('static', filename='events/event7.jpg') }}" class="event-photo" alt="Событие 7">
 <style>
   .event-photo {
     width: 100%;

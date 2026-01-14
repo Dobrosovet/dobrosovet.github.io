@@ -149,8 +149,12 @@ nav a.active {
 }
 
 /* Скрываем неактивные страницы */
-.page-content:not(.active) {
+.page-content {
   display: none;
+}
+
+.page-content.active {
+  display: block;
 }
 
 /* Заголовки */
@@ -528,11 +532,10 @@ nav a.active {
   }
 
   /* Листочек */
-  .page-content {
-    width: 98%;
-    padding: 5px;
-    margin: 10px auto;
-  }
+.page-content {
+  box-sizing: border-box;
+}
+
 
   /* Карточки услуг */
   .service-card {
@@ -553,24 +556,37 @@ nav a.active {
   }
 
   /* Карточки кейсов */
-  .case-cards-container {
-    padding: 0;
-    gap: 10px;
-  }
+.case-cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  margin-top: 20px;
+}
 
-  .case-card {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 10px;
-  }
-  .page-content h1:not(.home-quote) {
-    font-size: 1.1em;  /* уменьшаем размер заголовка на мобильных */
-    padding: 10px 15px; /* можно чуть уменьшить внутренние отступы */
-    top: -40px;         /* корректируем поднятие */
-    left: 5px;          /* чуть меньше смещаем */
-    margin-bottom: -20px; /* уменьшаем отрицательный маргин */
-  }
+.case-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 20px;
+
+  background: linear-gradient(145deg, #ffffff, #e6e6e6);
+  box-shadow:
+    5px 5px 15px rgba(0,0,0,0.15),
+   -5px -5px 15px rgba(255,255,255,0.9);
+
+  transition: all 0.3s ease;
+}
+
+.page-content h1:not(.home-quote) {
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
   .contact-item {
     gap: 20px; /* увеличиваем расстояние между иконкой и текстом на мобильных */
   }
@@ -1006,4 +1022,530 @@ nav a.active {
   .nav-hero .hero-actions {
     justify-content: center;
   }
+}
+/* Кружок регистрации */
+header {
+  position: relative;
+}
+
+.auth-circle {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgba(200, 200, 200, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.auth-circle:hover {
+  background: rgba(220, 220, 220, 0.4);
+  transform: scale(1.05);
+}
+
+/* Фон модального окна */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: none; /* скрыто по умолчанию */
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 9999;
+}
+
+/* Когда окно открыто */
+.modal-overlay[aria-hidden="false"] {
+  display: flex;
+}
+
+/* Само модальное окно */
+.auth-modal {
+  background: #fff; /* Белое окно для контраста */
+  color: #333;
+  width: 90%;
+  max-width: 380px;
+  min-height: 420px; /* Увеличим высоту, чтобы не было пусто */
+  border-radius: 22px; /* Ещё больше скругление */
+  padding: 30px 30px 20px 30px; /* Добавим больше отступов снизу */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  position: relative;
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/* Заголовок */
+.auth-modal h2 {
+  font-size: 1.5em; /* Умеренный размер шрифта */
+  margin-bottom: 10px; /* Небольшой отступ снизу для воздушности */
+  font-weight: 400; /* Обычная жирность для минималистичного стиля */
+  color: #555; /* Нежный серый цвет для строгого, но не мрачного вида */
+  text-transform: none; /* Без заглавных букв, чтобы текст не выглядел слишком громко */
+  letter-spacing: 0.5px; /* Легкое расстояние между буквами для чёткости */
+  font-family: 'Helvetica Neue', sans-serif; /* Чистый и современный шрифт */
+}
+
+
+/* Параграф */
+.auth-modal p {
+  font-size: 1.2em;
+  margin-bottom: 25px; /* Уменьшаем отступ */
+  color: #555;
+  line-height: 1.5; /* Увеличиваем интервал между строками для читаемости */
+}
+
+/* Кнопки OAuth */
+.oauth-btn {
+  width: 80%;
+  padding: 15px;
+  margin-top: 20px;
+  border-radius: 18px; /* увеличенное скругление */
+  border: 1px solid rgba(0,0,0,0.15); /* лёгкая обводка сразу */
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  background: #fff; /* обе кнопки белые */
+  color: #000;
+  transition: all 0.3s ease;
+}
+
+/* Hover эффект для кнопок */
+.oauth-btn:hover {
+  background: #f8f8f8;
+  border-color: rgba(0,0,0,0.25); /* чуть более заметная обводка при наведении */
+}
+
+/* Иконки в кнопках */
+.oauth-btn .oauth-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 12px;
+}
+
+/* Кнопка закрытия */
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: transparent;
+  border: 0;
+  font-size: 26px;
+  color: #000;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.modal-close:hover {
+  opacity: 1;
+}
+
+/* Тонкая линия для разделения контента */
+.auth-modal .divider {
+  width: 60%;
+  height: 1px;
+  background-color: #e0e0e0;
+  margin: 30px 0; /* Увеличим отступ сверху и снизу */
+}
+
+/* Надпись внизу */
+.auth-modal .footer-text {
+  font-size: 0.9em;
+  color: #777;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #e0e0e0; /* Линия сверху */
+}
+/* Контейнер профиля внутри модалки */
+/* Контейнер профиля */
+.profile-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Заголовок */
+.profile-title {
+  font-weight: 700;
+  color: #000;
+  text-align: left;
+  margin-bottom: 8px;
+}
+
+/* Линия */
+.profile-divider {
+  width: 100%;
+  height: 1px;
+  background: #ddd;
+  margin: 12px 0;
+}
+
+/* Блок авы + текста */
+.profile-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Аватар */
+.profile-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Имя */
+.profile-name {
+  font-weight: 600;
+  color: #000;
+}
+
+/* Почта */
+.profile-email {
+  font-size: 0.85em;
+  color: #666;
+  margin-top: 2px;
+}
+
+/* Форма выхода — ПРИЖИМАЕМ К НИЗУ */
+.profile-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* ← растягивается на всю высоту модалки */
+}
+
+
+/* Блок с кнопками */
+.profile-buttons {
+  margin-top: auto;        /* 🔥 ТОЛКАЕТ В САМЫЙ НИЗ */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+
+/* формы не ломаем */
+.logout-form,
+.switch-form {
+  display: flex;
+  justify-content: center;
+}
+
+/* кнопки */
+.logout-btn {
+  padding: 10px 22px;
+  border-radius: 25px;
+  border: 2px solid #e74c3c;
+  background: transparent;
+  color: #e74c3c;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.logout-btn:hover {
+  background: #e74c3c;
+  color: #fff;
+}
+
+.switch-btn {
+  padding: 10px 22px;
+  border-radius: 25px;
+  border: 2px solid #3498db;
+  background: transparent;
+  color: #3498db;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.switch-btn:hover {
+  background: #3498db;
+  color: #fff;
+}
+.reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.review-card {
+  padding: 20px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+}
+/* отзовыЫ */
+/* Обычные стили для страницы */
+.page-content {
+  padding-bottom: 70px; /* Это чтобы панель не перекрывала содержимое */
+}
+
+/* Фиксированная панель внизу */
+/* Фиксированная панель внизу */
+.review-input-container {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 30px;
+  padding: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Текстовое поле */
+#reviewText {
+  width: calc(100% - 50px);  /* Ширина на 10px меньше, чтобы оставить место для кнопки */
+  min-height: 40px;  /* Минимальная высота */
+  max-height: 120px; /* Максимальная высота */
+  border: none;
+  border-radius: 25px;
+  padding: 10px;
+  font-size: 16px;
+  outline: none;
+  resize: none;
+  background-color: #f2f2f2;
+  margin-right: 10px;
+  box-sizing: border-box;
+  overflow-y: auto;  /* Включаем вертикальную прокрутку, если текст выходит за пределы */
+}
+
+/* Кнопка с иконкой */
+.send-btn {
+  width: 40px;
+  height: 40px;
+  background-color: #00aaff;  /* Голубой цвет кнопки */
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Кнопка в отключенном состоянии */
+.send-btn.disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Иконка самолётика */
+.send-btn svg {
+  width: 20px;
+  height: 20px;
+  stroke: white;
+}
+
+/* Цвет кнопки при активности */
+.send-btn:not(.disabled):hover {
+  background-color: #0099cc;
+}
+
+/* Эффект при вводе текста */
+#reviewText:valid {
+  background-color: #e0f7ff;
+}
+
+/* Кнопка отправки */
+.send-btn {
+  background-color: #3983f1;
+  border-radius: 50%;
+  border: none;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+/* Стили для отправленных сообщений */
+.message {
+  max-width: 80%; /* Ограничиваем максимальную ширину (не на весь экран) */
+  background-color: #f0faff; /* Нежно-голубой, почти белый фон */
+  border-radius: 20px;  /* Скругленные углы */
+  padding: 12px 18px; /* Паддинг для аккуратного вида */
+  margin: 5px 0; /* Отступы между сообщениями */
+  font-size: 16px;
+  word-wrap: break-word;  /* Оборачиваем слова, чтобы они не выходили за пределы */
+  overflow-wrap: break-word;  /* Поддержка переноса длинных слов */
+  word-break: break-word;  /* Принудительный разрыв слов */
+  line-height: 1.4;
+  position: relative;  /* Для будущих фишек */
+}
+
+/* Сообщение, отправленное пользователем */
+.sent {
+  background-color: #e1f7ff;  /* Очень нежно-голубой цвет */
+  color: #333;  /* Темный текст для контраста */
+  margin-left: auto; /* Сдвигаем вправо */
+  margin-right: 10px;  /* Добавляем отступ с правой стороны */
+}
+
+/* Сообщение, полученное от другого пользователя */
+/* Чужое сообщение */
+.received {
+  background-color: #F8F4FF; /* 🌸 Magnolia */
+  color: #333;
+  margin-left: 10px;
+  margin-right: auto;
+}
+
+
+
+/* Стиль для текста сообщения */
+.message p {
+  margin: 0;
+  word-wrap: break-word;  /* Разрыв слов по мере необходимости */
+  max-width: 100%;
+}
+
+/* Группировка сообщений */
+#reviewsList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Отступ между сообщениями */
+}
+
+/* Обёртка сообщения */
+.message-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;  /* Для своих отзывов */
+}
+
+/* Для чужих сообщений */
+.received .message-wrapper {
+  align-items: flex-start;  /* Сдвигаем влево для чужих сообщений */
+}
+
+/* Заголовок сообщения с именем и аватаркой */
+.message-header {
+  display: flex;
+  justify-content: space-between; /* имя слева, аватарка справа для своих сообщений */
+  align-items: center;
+  margin-bottom: 6px; /* немного отступа от текста */
+}
+
+/* Заголовок чужого сообщения */
+.received .message-header {
+  justify-content: flex-start; /* всё слева */
+  gap: 8px;                    /* расстояние между аватаром и именем */
+}
+
+
+
+/* Имя пользователя */
+.message-username {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Аватарка (правая сторона) */
+.message-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Для чужих сообщений можно увеличить или добавить отступ */
+.received .message-avatar {
+  margin-right: 8px; /* Добавляем отступ справа для аватаров чужих сообщений */
+}
+
+/* Время отправки сообщения */
+.message-time {
+  font-size: 12px;
+  color: #999;  /* Серый цвет */
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+}
+/* Нижняя панель под сообщением */
+.message-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  padding-top: 4px;
+  border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+/* Кнопка лайка */
+.like-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+/* Счётчик лайков */
+.like-count {
+  font-size: 13px;
+  color: #8e8e8e;
+  user-select: none;
+}
+
+/* Время сообщения */
+.message-time {
+  font-size: 11px;
+  color: #9aa0a6;
+  position: absolute;
+  right: 12px;
+  bottom: 6px;
+}
+/* Обёртка сообщения */
+.message-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+/* Кнопки под сообщением */
+.message-controls {
+  display: flex;
+  gap: 12px;
+  margin-top: 4px;
+  margin-right: 14px; /* 🔹 сдвигаем ВЛЕВО */
+}
+
+/* Кнопки */
+.message-controls .action-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px;
+  opacity: 0.8;              /* 🔹 ярче */
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* Наведение */
+.message-controls .action-btn:hover {
+  opacity: 1;
+  transform: translateY(-1px); /* лёгкая "жизнь" */
+}
+
+/* Цвет иконок */
+.message-controls svg {
+  stroke: #6f6f6f; /* 🔹 темнее, чем было */
 }

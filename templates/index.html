@@ -8,58 +8,43 @@
   <meta name="robots" content="index, follow">
 
   <!-- Иконка сайта -->
-  <link rel="icon" href="Dobro.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="{{ url_for('static', filename='img/Dobro.png') }}" type="image/png" sizes="32x32">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
 
   <!-- Open Graph метатеги для соцсетей -->
   <meta property="og:title" content="ДоброСовѣтъ">
   <meta property="og:description" content="Помощь людям, защита прав, общественные инициативы, социальные проекты.">
-  <meta property="og:image" content="Dobro.png"> <!-- укажи путь к изображению для соцсетей -->
-  <meta property="og:url" content="https://твой_сайт.ру">
+  <meta property="og:image" content="{{ url_for('static', filename='icons/Dobro.png') }}">
+  <meta property="og:url" content="https://dobrosovet.github.io/">
   <meta property="og:type" content="website">
 
   <title>ДоброСовѣтъ</title>
-  <link rel="stylesheet" href="style.css">
-  <style>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
 
-    .page-content {
-      padding-bottom: 40px;
-      margin-bottom: 0;
-    }
 
-  
-    .projects-text {
-      margin-bottom: 0;
-      padding-bottom: 0;
-    }
-
-  
-    body, html {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-    }
-
-    main {
-      min-height: calc(100vh - 150px);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-    }
-  </style>
 </head>
-
+<body>
  <div class="container">
-    <header>
-      <div class="header-content">
-        <img src="sova.png" alt="Фото" class="header-img">
-        <div class="header-text">
-          <h1>ДоброСовѣтъ</h1>
-          <p>Правозащитный центр добрых людей.</p>
-        </div>
-      </div>
-    </header>
+{% set avatar_url = session.get('user')['avatar'] if session.get('user') else url_for('static', filename='icons/avatar.png') %}
+
+<header>
+  <div class="header-content">
+    <img src="{{ url_for('static', filename='img/sova.png') }}" alt="Фото" class="header-img">
+    <div class="header-text">
+      <h1>ДоброСовѣтъ</h1>
+      <p>Правозащитный центр добрых людей.</p>
+    </div>
+  </div>
+
+  <!-- Кружок с аватаркой -->
+  <div class="auth-circle" id="openAuth"
+       style="background-image: url('{{ avatar_url }}'); 
+              background-size: cover; 
+              background-position: center;">
+  </div>
+</header>
 
 <nav>
   <ul>
@@ -68,6 +53,7 @@
     <li><a href="#" onclick="showPage('services', event)">Услуги</a></li>
     <li><a href="#" onclick="showPage('contact', event)">Контакты</a></li>
     <li><a href="#" onclick="showPage('portfolio', event)">Ситуации</a></li>
+    <li><a href="#" onclick="showPage('reviews', event)">Отзывы</a></li>  
   </ul>
 </nav>
     <main>
@@ -220,81 +206,6 @@
   </div>
 </div>
 
-<div id="portfolio" class="page-content">
-  <h1>Ситуации</h1>
-<div class="case-cards-container">
-  <!-- Карточка 1 -->
-  <div class="case-card">
-    <h3>ИА в среднем и дополнительном образовании (итоговая аттестация и ГИА в школах)</h3>
-    <div class="situation-text">
-      <p>Ситуация 1. Выпускнику 9 класса не выдают документ об образовании, несмотря на имеющуюся аттестацию. Отказ образовательной организации проводить итоговую аттестацию и выдавать документ об образовании успешному выпускнику. После 9 класса не поступить в колледж без документа об образовании (справка со всеми оценками не подходит колледжам).</p>
-      <p>Ситуация 2. Выпускника 9 класса не переводят в 10 класс по причине неполучения аттестата за 9 класс.</p>
-      <p>Ситуация 3. После 9 класса не поступить в колледж без документа об образовании (справка со всеми оценками не подходит колледжам). Поданы иски о возмещении морального вреда в суд первой инстанции. Обжалование отказных решений происходит в судах апелляционной и кассационной инстанции. Всё предается огласке.</p>
-      <P>Ситуация 4. Выпускник, получивший сиреневый аттестат с оценками 4 и 5, обнаруживает, что в аттестате отсутствуют сведения об экзаменах и сведения о ГЭК, а также то что формат бланка аттестата не соответствует его приложению. При этом документ был выдан «под подпись», то есть под личную ответственность. Требуется проведение экспертизы представленного документа на проверку фальсификации и  соответствию действующему законодательству. При необходимости готовится иск в суд по защите прав потребителей с компенсацией морального вреда.</P>
-      <p><a href="https://t.me/+_Axpa09KIgcyMjZi" target="_blank">Ссылка на телеграм-чат «Итоговая аттестация в школе»</a></p> 
-      <p><a href="https://dzen.ru/a/ZtqAIWSljRO9DXnL" target="_blank">Источник: dzen.ru</a></p>
-      <p><a href="situation1.html" class="btn">Подробнее</a></p>
-    </div>
-    <div class="toggle-btn">▼ Развернуть</div>
-  </div>
-
-  <!-- Карточка 2 -->
-  <div class="case-card">
-    <h3>Авгиевы конюшни РЖД-СЗППК (ответственность за санитарное состояние);</h3>
-    <div class="situation-text">
-      <p>Ситуация 1. Человек заходит в первый или последний вагон электрички, и вынужден перебегать в другой вагон
-         из-за смрадного отвратительного зловония, распространенного из незакрывающегося (открытого) 
-         туалета с переполненной чашей с экскрементами. Звонки на горячую линию РЖД, общение по кнопке «пассажир-машинист», 
-         обращение к проводникам не приводят к нужному результату.</p>
-      <p>Ситуация 2. Человек, которому надо сходить в туалет, вынужден мириться с полной антисанитарией, отсутствием воды или кранов, 
-         неработающими сортирами. А в некоторых случаях из-под кранов течет коричневая жижа с характерным запахом.</p> 
-      <p>Ситуация 3. Требование юриста СЗППК предоставить именные билеты, в то время как кассиры и контролёры о них ничего не знают.</p>
-      <p>Ситуация 4. Оферты руководству СЗППК и РЖД в отсутствие должного санитарного содержания подвижных составов.</p>
-      <p><a href="situation2.html" class="btn">Подробнее</a></p>
-    </div>
-    <div class="toggle-btn">▼ Развернуть</div>
-  </div>
-
-  <!-- Карточка 3 -->
-  <div class="case-card">
-    <h3>Нить Ариадны в лабиринте СМИ (последствия инцидента 3 августа 2021 года в кафе «Папарацци» в Выборге);</h3>
-    <div class="situation-text">
-      <p>Ситуация 1. 3 августа 2021 года вероломное вторжение посторонних лиц в кафе, где трудилась супружеская пара, было подано СМИ с подменой понятий, в результате растиражированная при помощи агрегаторов — привело к трагическим последствиям, случившимся в семье всемирно известного реставратора.</p>
-      <p>Ситуация 2. Иск по возмещению морального вреда со СМИ суды упорно не принимают уже больше года.</p>
-      <p><a href="https://dzen.ru/a/aKQ79FHyoSx0Pyqq" target="_blank">Дополнительная информация</a></p>
-      <p><a href="situation3.html" class="btn">Подробнее</a></p>
-    </div>
-    <div class="toggle-btn">▼ Развернуть</div>
-  </div>
-
-  <!-- Карточка 4 -->
-  <div class="case-card">
-    <h3>Тернистым путём эколога-общественника</h3>
-    <div class="situation-text">
-      <p>Ситуация 1. Как известные СМИ через телеграм-каналы и дзен порочат имя и репутацию эколога-общественника Сергея Грибалёва.</p>
-      <p>Ситуация 2. Как суды упираются и не принимают иски по защите чести и достоинства, компенсации морального вреда.</p>
-      <p><a href="https://dzen.ru/a/XnRtvWOgUnsrRpu1?ysclid=mhkq43m842244014688" target="_blank">Жертва амбиций: Online47.ru</a></p>
-      <p><a href="https://og47.ru/2020/03/20/Malenkii-chelovek-v-poiskakh-bolshogo-skandala.-Ili-kak-obizhennyi-laquoekspert-ekolog-obschestvennikraquo-Sergei-Gribalev-dokatilsya-do-takoi-zhizni-8728" target="_blank">Маленький человек в поисках большого скандала: og47.ru</a></p>
-      <p><a href="situation4.html" class="btn">Подробнее</a></p>
-    </div>
-    <div class="toggle-btn">▼ Развернуть</div>
-  </div>
- <!-- Карточка 5 -->
-<div class="case-card">
-  <h3>Домам культуры – быть! (борьба за дом Культуры в посёлке Победа Ленинградской области)</h3>
-  <div class="situation-text">
-    <p>Ситуация 1. Разгромлен ранее работавший дом культуры – объект социальной инфраструктуры посёлка. Нет кружков, секций и места проведения досуга. Местная администрация отправляет проводить досуг за 22 км от поселка.</p>
-    <p><a href="situation5.html" class="btn">Подробнее</a></p>
-  </div>
-  <div class="toggle-btn">▼ Развернуть</div>
-</div>
-</div>
-</div>
-
-
-
-
-
 
 <!-- УСЛУГИ -->
 <div id="services" class="page-content">
@@ -342,6 +253,191 @@
 </div>
 
 
+
+<div id="portfolio" class="page-content">
+  <h1>Ситуации</h1>
+<div class="case-cards-container">
+  <!-- Карточка 1 -->
+  <div class="case-card">
+    <h3>ИА в среднем и дополнительном образовании (итоговая аттестация и ГИА в школах)</h3>
+    <div class="situation-text">
+      <p>Ситуация 1. Выпускнику 9 класса не выдают документ об образовании, несмотря на имеющуюся аттестацию. Отказ образовательной организации проводить итоговую аттестацию и выдавать документ об образовании успешному выпускнику. После 9 класса не поступить в колледж без документа об образовании (справка со всеми оценками не подходит колледжам).</p>
+      <p>Ситуация 2. Выпускника 9 класса не переводят в 10 класс по причине неполучения аттестата за 9 класс.</p>
+      <p>Ситуация 3. После 9 класса не поступить в колледж без документа об образовании (справка со всеми оценками не подходит колледжам). Поданы иски о возмещении морального вреда в суд первой инстанции. Обжалование отказных решений происходит в судах апелляционной и кассационной инстанции. Всё предается огласке.</p>
+      <P>Ситуация 4. Выпускник, получивший сиреневый аттестат с оценками 4 и 5, обнаруживает, что в аттестате отсутствуют сведения об экзаменах и сведения о ГЭК, а также то что формат бланка аттестата не соответствует его приложению. При этом документ был выдан «под подпись», то есть под личную ответственность. Требуется проведение экспертизы представленного документа на проверку фальсификации и  соответствию действующему законодательству. При необходимости готовится иск в суд по защите прав потребителей с компенсацией морального вреда.</P>
+      <p><a href="https://t.me/+_Axpa09KIgcyMjZi" target="_blank">Ссылка на телеграм-чат «Итоговая аттестация в школе»</a></p> 
+      <p><a href="https://dzen.ru/a/ZtqAIWSljRO9DXnL" target="_blank">Источник: dzen.ru</a></p>
+      <p><a href="{{ url_for('situation1') }}" class="btn">Подробнее</a></p>
+    </div>
+    <div class="toggle-btn">▼ Развернуть</div>
+  </div>
+
+  <!-- Карточка 2 -->
+  <div class="case-card">
+    <h3>Авгиевы конюшни РЖД-СЗППК (ответственность за санитарное состояние);</h3>
+    <div class="situation-text">
+      <p>Ситуация 1. Человек заходит в первый или последний вагон электрички, и вынужден перебегать в другой вагон
+         из-за смрадного отвратительного зловония, распространенного из незакрывающегося (открытого) 
+         туалета с переполненной чашей с экскрементами. Звонки на горячую линию РЖД, общение по кнопке «пассажир-машинист», 
+         обращение к проводникам не приводят к нужному результату.</p>
+      <p>Ситуация 2. Человек, которому надо сходить в туалет, вынужден мириться с полной антисанитарией, отсутствием воды или кранов, 
+         неработающими сортирами. А в некоторых случаях из-под кранов течет коричневая жижа с характерным запахом.</p> 
+      <p>Ситуация 3. Требование юриста СЗППК предоставить именные билеты, в то время как кассиры и контролёры о них ничего не знают.</p>
+      <p>Ситуация 4. Оферты руководству СЗППК и РЖД в отсутствие должного санитарного содержания подвижных составов.</p>
+      <p><a href="{{ url_for('situation2') }}" class="btn">Подробнее</a></p>
+    </div>
+    <div class="toggle-btn">▼ Развернуть</div>
+  </div>
+
+  <!-- Карточка 3 -->
+  <div class="case-card">
+    <h3>Нить Ариадны в лабиринте СМИ (последствия инцидента 3 августа 2021 года в кафе «Папарацци» в Выборге);</h3>
+    <div class="situation-text">
+      <p>Ситуация 1. 3 августа 2021 года вероломное вторжение посторонних лиц в кафе, где трудилась супружеская пара, было подано СМИ с подменой понятий, в результате растиражированная при помощи агрегаторов — привело к трагическим последствиям, случившимся в семье всемирно известного реставратора.</p>
+      <p>Ситуация 2. Иск по возмещению морального вреда со СМИ суды упорно не принимают уже больше года.</p>
+      <p><a href="https://dzen.ru/a/aKQ79FHyoSx0Pyqq" target="_blank">Дополнительная информация</a></p>
+      <p><a href="{{ url_for('situation3') }}" class="btn">Подробнее</a></p>
+    </div>
+    <div class="toggle-btn">▼ Развернуть</div>
+  </div>
+
+  <!-- Карточка 4 -->
+  <div class="case-card">
+    <h3>Тернистым путём эколога-общественника</h3>
+    <div class="situation-text">
+      <p>Ситуация 1. Как известные СМИ через телеграм-каналы и дзен порочат имя и репутацию эколога-общественника Сергея Грибалёва.</p>
+      <p>Ситуация 2. Как суды упираются и не принимают иски по защите чести и достоинства, компенсации морального вреда.</p>
+      <p><a href="https://dzen.ru/a/XnRtvWOgUnsrRpu1?ysclid=mhkq43m842244014688" target="_blank">Жертва амбиций: Online47.ru</a></p>
+      <p><a href="https://og47.ru/2020/03/20/Malenkii-chelovek-v-poiskakh-bolshogo-skandala.-Ili-kak-obizhennyi-laquoekspert-ekolog-obschestvennikraquo-Sergei-Gribalev-dokatilsya-do-takoi-zhizni-8728" target="_blank">Маленький человек в поисках большого скандала: og47.ru</a></p>
+      <p><a href="{{ url_for('situation4') }}" class="btn">Подробнее</a></p>
+    </div>
+    <div class="toggle-btn">▼ Развернуть</div>
+  </div>
+ <!-- Карточка 5 -->
+<div class="case-card">
+  <h3>Домам культуры – быть! (борьба за дом Культуры в посёлке Победа Ленинградской области)</h3>
+  <div class="situation-text">
+    <p>Ситуация 1. Разгромлен ранее работавший дом культуры – объект социальной инфраструктуры посёлка. Нет кружков, секций и места проведения досуга. Местная администрация отправляет проводить досуг за 22 км от поселка.</p>
+    <p><a href="{{ url_for('situation5') }}" class="btn">Подробнее</a></p>
+  </div>
+  <div class="toggle-btn">▼ Развернуть</div>
+</div>
+</div>
+</div>
+
+<!-- ОТЗОВЫ! -->
+<div id="reviews" class="page-content"
+     data-username="{% if session.get('user') %}{{ session['user']['name'] }}{% else %}Аноним{% endif %}"
+     data-avatar="{% if session.get('user') %}{{ session['user']['avatar'] }}{% else %}/static/default-avatar.png{% endif %}">
+  
+  <h1>Отзывы</h1>
+  <div class="reviews-text">
+    <p>Здесь будут размещены отзывы людей, которые воспользовались нашими услугами:</p>
+  </div>
+<div id="cookieBanner" class="cookie-banner">
+  <p>Сайт использует технические cookies для корректной работы и авторизации через Google и Яндекс.</p>
+  <button id="acceptCookies" class="cookie-btn">Принять</button>
+</div>
+
+<style>
+  #cookieBanner {
+    position: fixed;
+    top: 50%; /* Центрируем по вертикали */
+    right: 20px;
+    transform: translateY(-50%); /* Точно центрируем по вертикали */
+    background-color: #e0f7fa; /* Светло-голубой */
+    color: #333;
+    padding: 10px 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-size: 13px;
+    z-index: 1000;
+    display: none;
+    width: 250px; /* Уменьшено до 250px */
+    font-family: 'Arial', sans-serif;
+  }
+
+  #cookieBanner p {
+    margin: 0;
+    font-weight: normal;
+    line-height: 1.4; /* Уменьшение межстрочного интервала */
+    font-size: 12px; /* Немного уменьшен размер шрифта */
+  }
+
+  .cookie-btn {
+    background-color: #00796b; /* Тёмно-голубой/бирюзовый */
+    color: white;
+    border: none;
+    padding: 6px 12px; /* Уменьшено пространство внутри кнопки */
+    cursor: pointer;
+    font-size: 12px; /* Уменьшен размер шрифта */
+    border-radius: 4px;
+    margin-top: 8px; /* Немного уменьшено расстояние */
+  }
+
+  .cookie-btn:hover {
+    background-color: #004d40; /* Тёмный оттенок */
+  }
+</style>
+
+<script>
+  // Проверка, если куки уже приняты
+  if (document.cookie.indexOf('cookies_accepted=true') === -1) {
+    document.getElementById('cookieBanner').style.display = 'block';
+  }
+
+  // Событие на принятие куки
+  document.getElementById('acceptCookies').onclick = function() {
+    document.cookie = "cookies_accepted=true; path=/; max-age=" + 60 * 60 * 24 * 365;  // Кука на 1 год
+    document.getElementById('cookieBanner').style.display = 'none';
+  };
+</script>
+
+  <!-- Список отзывов -->
+  <div id="reviewsList" style="margin-top:20px;">
+    {% if session.get('user') and session['user']['banned'] == 1 %}
+      <p style="color: red;">Ваш аккаунт заблокирован. Вы не можете писать или просматривать отзывы.</p>
+    {% else %}
+      <!-- Список отзывов будет здесь -->
+      <div id="reviewsListContent"></div>
+    {% endif %}
+  </div>
+
+  {% if not (session.get('user') and session['user']['banned'] == 1) %}
+    <!-- Форма для ввода отзыва (если не заблокирован) -->
+    <div class="review-input-container">
+      <textarea id="reviewText" placeholder="Напишите отзыв"></textarea>
+
+      <button id="sendReviewBtn" class="send-btn" aria-label="Отправить">
+        <!-- Самолётик (Telegram-style) -->
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="18"
+             height="18"
+             viewBox="0 0 24 24"
+             fill="none"
+             stroke="#8e8e8e"
+             stroke-width="2"
+             stroke-linecap="round"
+             stroke-linejoin="round">
+          <path d="M22 2L11 13"/>
+          <path d="M22 2L15 22l-4-9-9-4 20-7z"/>
+        </svg>
+      </button>
+    </div>
+  {% else %}
+    <script>
+      // Делаем кнопку недоступной для заблокированного пользователя
+      document.getElementById('sendReviewBtn').classList.add('disabled');
+      document.getElementById('sendReviewBtn').setAttribute('aria-label', 'Вы заблокированы');
+    </script>
+  {% endif %}
+
+  <!-- Надпись для неавторизованных пользователей -->
+  {% if not session.get('user') %}
+    <p style="text-align: center; margin-top: 20px;">Авторизуйтесь, чтобы оставить отзыв.</p>
+  {% endif %}
+</div>
+
 <!-- КОНТАКТЫ -->
 <div id="contact" class="page-content">
   <h1>Контакты</h1>
@@ -349,26 +445,30 @@
   <div class="contact-info">
     <p>Связь с нами через:</p>
 
-  <div class="contact-item">
-  <img src="t.png" alt="t" class="messenger-icon">
-  <a href="https://t.me/+pW5ZWvaeyeU4NTEy" target="_blank" class="contact-link">
-    Телеграм: Присоединиться к каналу
-  </a>
-</div>
+    <div class="contact-item">
+      <img src="{{ url_for('static', filename='icons/t.png') }}" alt="Телеграм" class="messenger-icon">
+      <a href="https://t.me/+pW5ZWvaeyeU4NTEy" target="_blank" class="contact-link">
+        Телеграм: Присоединиться к каналу
+      </a>
+    </div>
 
-<div class="contact-item">
-  <img src="g.png" alt="gl" class="messenger-icon">
-  <a href="https://mail.google.com/mail/?view=cm&fs=1&to=dobrosovet5@gmail.com" target="_blank" class="contact-link">
-    Написать на Gmail dobrosovet5@gmail.com
-  </a>
-</div>
+    <div class="contact-item">
+      <img src="{{ url_for('static', filename='icons/g.png') }}" alt="Gmail" class="messenger-icon">
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=dobrosovet5@gmail.com" target="_blank" class="contact-link">
+        Написать на Gmail dobrosovet5@gmail.com
+      </a>
+    </div>
+  </div>
+
+
+
 <!-- Поддержать проект -->
 <div class="donate-block">
   <button id="donateBtn" class="donate-btn">💙 Поддержать проект</button>
 </div>
 
 <!-- Модальное окно -->
-<div id="donateModal" class="modal" aria-hidden="true">
+<div id="donateModa2" class="modal" aria-hidden="true">
   <div class="modal-content">
     <button class="modal-close" id="modalClose">&times;</button>
 
@@ -388,23 +488,72 @@
     <p class="note">Спасибо за поддержку проекта!</p>
   </div>
 </div>
-
-
     </main>
   </div>
 
-  <script>
-    function showPage(pageId, event) {
-      event.preventDefault();
-      const pages = document.querySelectorAll('.page-content');
-      pages.forEach(page => page.classList.remove('active'));
-      document.getElementById(pageId).classList.add('active');
 
-      const links = document.querySelectorAll('nav a');
-      links.forEach(link => link.classList.remove('active'));
-      event.target.classList.add('active');
-    }
-  </script>
-<script src="script.js"></script>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script src="{{ url_for('static', filename='js/reviews.js') }}"></script>
+
+<div class="modal-overlay" id="authModal" aria-hidden="true">
+  <div class="auth-modal">
+    <button class="modal-close" id="closeAuth">&times;</button>
+
+{% if session.get('user') %}
+
+  <!-- ПРОФИЛЬ -->
+  <div class="profile-container">
+
+    <h2 class="profile-title">Профиль</h2>
+    <hr class="profile-divider">
+
+    <div class="profile-info">
+      <img src="{{ session['user']['avatar'] }}" alt="Avatar" class="profile-avatar">
+
+      <div class="profile-details">
+        <div class="profile-name">{{ session['user']['name'] }}</div>
+        <div class="profile-email">{{ session['user']['email'] }}</div>
+      </div>
+    </div>
+
+    <!-- Кнопка выхода -->
+    <div class="profile-buttons">
+      <form method="POST" action="/logout">
+        <button type="submit" class="logout-btn">Выйти из аккаунта</button>
+      </form>
+    </div>
+
+  </div>
+
+{% else %}
+
+  <!-- АВТОРИЗАЦИЯ -->
+  <h2>Вход/Авторизация</h2>
+  <p>Выберите способ входа</p>
+
+  <div class="divider"></div>
+
+  <!-- Google -->
+  <a href="{{ url_for('google_login') }}" class="oauth-btn google">
+    <img src="{{ url_for('static', filename='icons/google.png') }}" class="oauth-icon">
+    Войти с Google
+  </a>
+
+  <!-- Yandex -->
+  <a href="{{ url_for('yandex_login') }}" class="oauth-btn yandex">
+    <img src="{{ url_for('static', filename='icons/yandex.png') }}" class="oauth-icon">
+    Войти с Яндекс
+  </a>
+
+  <div class="footer-text">
+    Ваши данные будут защищены
+  </div>
+
+{% endif %}
+
+
+  </div>
+</div>
+
 </body>
 </html>

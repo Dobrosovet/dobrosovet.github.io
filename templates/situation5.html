@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<link rel="icon" href="Dobro.png" type="image/png" sizes="32x32">  
-<meta charset="UTF-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ДоброСовѣтъ</title>
-  <link rel="stylesheet" href="style.css">
+  <title>ДоброСовѣтъ - Ситуация 1</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="icon" href="{{ url_for('static', filename='Dobro.png') }}" type="image/png" sizes="32x32">
   <style>
     .page-content {
       padding-bottom: 40px;
@@ -60,7 +60,7 @@
   <div class="container">
     <header>
       <div class="header-content">
-        <img src="sova.png" alt="Фото" class="header-img">
+      <img src="{{ url_for('static', filename='img/sova.png') }}" alt="Фото" class="header-img">
         <div class="header-text">
           <h1>ДоброСовѣтъ</h1>
           <p>Правозащитный центр добрых людей</p>
@@ -85,7 +85,7 @@
   <p>Разгромленные дома культуры в местности, к сожалению, уже не редкость в современной России. Несмотря на наличие государственных программ для реставрации домов культуры, местные депутаты не стремятся их использовать для роста народного благосостояния. Неразрывная связь культуры общества и уровня жизни – неоспорима для большинства. Но, как оказалось, недоступно для понимания депутатов, судей и чиновников.</p>
 
   <p><strong>Из апелляционного требования:</strong></p>
- <img src="events/event6.jpg" class="event-photo" alt="Событие 6">
+<img src="{{ url_for('static', filename='events/event6.jpg') }}" class="event-photo" alt="Событие 6">
 <style>
   .event-photo {
     width: 100%;
