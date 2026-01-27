@@ -1,4 +1,3 @@
-#app.py
 from flask import Flask, redirect, request, session, render_template, jsonify  # Импортируем jsonify
 import os
 import requests
@@ -7,6 +6,9 @@ from database import create_tables, add_user
 # В app.py
 import random
 import string
+
+# Импортируем waitress
+from waitress import serve
 
 def generate_unique_id():
     """Генерация уникального ID для клиента (для фронтенда)"""
