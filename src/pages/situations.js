@@ -78,76 +78,66 @@ const situations = [
 ];
 
 export const SituationsPage = () => `
-    <div class="max-w-4xl mx-auto pt-8 pb-16 px-4">
-        <h1 class="text-5xl font-black mb-4 text-slate-900 tracking-tight">Дела, в которых участвует Добросовет</h1>
-        <p class="text-xl text-slate-500 mb-12">По всем делам поданы исковые требования о восстановлении нарушенных прав и компенсации морального вреда.</p>
+    <div class="max-w-4xl mx-auto pt-6 pb-12 px-4">
+        <h1 class="text-3xl md:text-5xl font-black mb-3 text-slate-900 tracking-tight">Дела Добросовета</h1>
+        <p class="text-base md:text-xl text-slate-500 mb-8 md:mb-12">По всем делам поданы исковые требования о восстановлении прав.</p>
         
-        <div class="flex flex-col gap-10">
+        <div class="flex flex-col gap-6 md:gap-10">
             ${[...situations].sort(() => Math.random() - 0.5).map(sit => `
-                <div class="situation-banner bg-white rounded-[2.5rem] border border-slate-100 shadow-sm overflow-hidden flex flex-col">
+                <div class="situation-banner bg-white rounded-[1.5rem] md:rounded-[2.5rem] border border-slate-100 shadow-sm overflow-hidden flex flex-col">
                     
-                    <!-- Здесь увеличили высоту для компов: md:h-[400px] lg:h-[480px] -->
-                    <div class="w-full h-64 md:h-[400px] lg:h-[480px] shrink-0 relative overflow-hidden group bg-slate-100">
+                    <div class="w-full h-48 md:h-[400px] lg:h-[480px] shrink-0 relative overflow-hidden group bg-slate-100">
                         <img 
                             src="${sit.image}" 
                             alt="${sit.title}" 
                             class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-                            onerror="this.src='https://via.placeholder.com/800x600?text=Ошибка+загрузки+фото'"
                         />
-                        <div class="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     </div>
 
-                    <div class="p-8 md:p-10">
+                    <div class="p-5 md:p-10">
                         
-                        <!-- Шапка карточки: Заголовок + Плюшечка со статусом -->
-                        <div class="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-4">
-                            <h3 class="text-3xl font-bold text-slate-900 pr-4">${sit.title}</h3>
+                        <div class="flex flex-col md:flex-row md:items-start justify-between gap-3 mb-4">
+                            <h3 class="text-xl md:text-3xl font-bold text-slate-900 pr-4 leading-tight">${sit.title}</h3>
                             
-                            <!-- Та самая новая плюшечка -->
-                            <div class="relative shrink-0 z-10">
-                                <button onclick="toggleStatus('popup-${sit.id}')" 
-                                        class="flex items-center gap-2 px-4 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-2xl text-slate-700 font-medium transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                                    <i data-lucide="clock" class="w-4 h-4 text-amber-500"></i>
-                                    <i data-lucide="check-circle" class="w-4 h-4 text-emerald-500"></i>
-                                    <span class="text-sm">Статус</span>
+                            <div class="relative shrink-0">
+                                <button onclick="toggleStatus(event, 'popup-${sit.id}')" 
+                                        class="flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl text-slate-700 font-medium transition-all shadow-sm">
+                                    <i data-lucide="clock" class="w-3.5 h-3.5 text-amber-500"></i>
+                                    <span class="text-xs md:text-sm">Статус</span>
                                 </button>
                                 
-                                <!-- Всплывающий мини-попап -->
-                                <div id="popup-${sit.id}" class="status-popup hidden absolute w-36 right-0 top-full mt-2 p-3 bg-slate-900 text-white text-sm font-medium text-center rounded-xl shadow-xl border border-slate-700 transition-all">
+                                <div id="popup-${sit.id}" class="status-popup hidden absolute w-32 md:w-36 right-0 top-full mt-2 p-2.5 bg-slate-900 text-white text-xs md:text-sm font-medium text-center rounded-xl shadow-xl z-50">
                                     Идет суд 
-                                    <!-- Треугольничек (хвостик) попапа -->
-                                    <div class="absolute bottom-full right-8 border-[6px] border-transparent border-b-slate-900"></div>
+                                    <div class="absolute bottom-full right-6 border-[6px] border-transparent border-b-slate-900"></div>
                                 </div>
                             </div>
                         </div>
                         
-                        <div id="preview-${sit.id}" class="text-slate-600 text-lg leading-relaxed line-clamp-3">
+                        <div id="preview-${sit.id}" class="text-slate-600 text-sm md:text-lg leading-snug md:leading-relaxed line-clamp-3">
                             ${sit.fullText}
                         </div>
 
                         <div id="grid-${sit.id}" class="expandable-grid">
                             <div class="expandable-inner">
-                                <div class="text-slate-600 text-lg leading-relaxed pt-4">
+                                <div class="text-slate-600 text-sm md:text-lg leading-snug md:leading-relaxed pt-3">
                                     ${sit.fullText}
                                 </div>
                             </div>
                         </div>
 
-                       <div class="mt-8 pt-6 border-t border-slate-50 flex flex-col md:flex-row items-center justify-between gap-4">
-    <!-- Кнопка «Читать полностью» (останется слева) -->
-    <button onclick="toggleExpand('${sit.id}')" 
-            class="flex items-center justify-center w-full md:w-auto md:min-w-[200px] px-8 py-4 bg-slate-900 hover:bg-slate-800 text-white rounded-2xl transition-all duration-300 font-bold shadow-lg shadow-slate-200">
-        <span id="btn-${sit.id}">Читать полностью</span>
-        <i id="icon-${sit.id}" data-lucide="chevron-down" class="w-5 h-5 transition-transform duration-300 ml-4"></i>
-    </button>
+                       <div class="mt-6 pt-5 border-t border-slate-50 flex flex-col md:flex-row items-center justify-between gap-3">
+                            <button onclick="toggleExpand('${sit.id}')" 
+                                    class="flex items-center justify-center w-full md:w-auto md:min-w-[200px] px-6 py-3 md:py-4 bg-slate-900 hover:bg-slate-800 text-white rounded-xl md:rounded-2xl transition-all font-bold text-sm md:text-base">
+                                <span id="btn-${sit.id}">Читать полностью</span>
+                                <i id="icon-${sit.id}" data-lucide="chevron-down" class="w-4 h-4 md:w-5 md:h-5 ml-2"></i>
+                            </button>
 
-    <!-- Кнопка «Подробности дела» (уедет вправо на десктопе) -->
-    <button onclick="navigateTo('situation-detail', '${sit.id}')" 
-            class="flex items-center justify-center w-full md:w-auto px-8 py-4 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 rounded-2xl transition-all duration-300 font-bold border border-indigo-100">
-         Подробности дела
-        <i data-lucide="arrow-right" class="w-5 h-5 ml-2"></i>
-    </button>
-</div>
+                            <button onclick="navigateTo('situation-detail', '${sit.id}')" 
+                                    class="flex items-center justify-center w-full md:w-auto px-6 py-3 md:py-4 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 rounded-xl md:rounded-2xl transition-all font-bold border border-indigo-100 text-sm md:text-base">
+                                 Подробности
+                                <i data-lucide="arrow-right" class="w-4 h-4 md:w-5 md:h-5 ml-2"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             `).join('')}

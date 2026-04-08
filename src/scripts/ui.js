@@ -1,7 +1,6 @@
 // src/scripts/ui.js
 
 export function initUI() {
-    
     const menuBtn = document.getElementById('mobile-menu-toggle');
     const closeBtn = document.getElementById('mobile-menu-close');
     const overlay = document.getElementById('mobile-menu-overlay');
@@ -10,9 +9,36 @@ export function initUI() {
         menuBtn.addEventListener('click', () => overlay.classList.remove('hidden'));
         closeBtn.addEventListener('click', () => overlay.classList.add('hidden'));
     }
+
+    // ЛОГИКА ИСЧЕЗНОВЕНИЯ ПРИ СКРОЛЛЕ
+    // Как только пользователь начинает листать, мы закрываем все открытые попапы статуса
+    window.addEventListener('scroll', () => {
+        document.querySelectorAll('.status-popup').forEach(p => {
+            if (!p.classList.contains('hidden')) {
+                p.classList.add('hidden');
+            }
+        });
+    }, { passive: true });
 }
 
-// Привязываем функции к window, чтобы они работали из HTML-разметки (onclick="...")
+// Обновленная функция статуса (принимает event, чтобы клик не закрывался сразу)
+window.toggleStatus = (event, popupId) => {
+    if (event) event.stopPropagation(); // Останавливаем всплытие
+    const popup = document.getElementById(popupId);
+    
+    // Закрываем другие, если они открыты
+    document.querySelectorAll('.status-popup').forEach(p => {
+        if (p.id !== popupId) p.classList.add('hidden');
+    });
+    
+    popup.classList.toggle('hidden');
+};
+
+// Закрытие попапа при клике в любое пустое место экрана
+document.addEventListener('click', () => {
+    document.querySelectorAll('.status-popup').forEach(p => p.classList.add('hidden'));
+});
+
 window.toggleExpand = function(id) {
     const grid = document.getElementById(`grid-${id}`);
     const preview = document.getElementById(`preview-${id}`);
@@ -22,33 +48,19 @@ window.toggleExpand = function(id) {
     const isOpen = grid.classList.contains('is-open');
 
     if (!isOpen) {
-        // Открываем
         grid.classList.add('is-open');
-        preview.classList.add('hidden'); // Прячем обрубок текста
+        preview.classList.add('hidden');
         btn.innerText = 'Свернуть';
         icon.style.transform = 'rotate(180deg)';
     } else {
-        // Закрываем
         grid.classList.remove('is-open');
-        preview.classList.remove('hidden'); // Возвращаем обрубок
-        btn.innerText = 'Развернуть ситуацию';
+        preview.classList.remove('hidden');
+        btn.innerText = 'Читать полностью'; // Сделал текст чуть короче для мобилок
         icon.style.transform = 'rotate(0deg)';
     }
 };
+
 window.showRequisites = function() {
     document.getElementById('support-content').classList.add('hidden');
     document.getElementById('requisites').classList.remove('hidden');
-};
-window.toggleStatus = (popupId) => {
-    const popup = document.getElementById(popupId);
-    
-    // Прячем все остальные открытые попапы, чтобы на экране был только один (для красоты)
-    document.querySelectorAll('.status-popup').forEach(p => {
-        if (p.id !== popupId) {
-            p.classList.add('hidden');
-        }
-    });
-    
-    // Открываем/закрываем тот, на который кликнули
-    popup.classList.toggle('hidden');
 };
