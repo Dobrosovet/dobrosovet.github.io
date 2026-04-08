@@ -1,0 +1,47 @@
+Структура папок тома Windows 10
+Серийный номер тома: D6BE-FD12
+C:.
+|   index.html
+|   package.json
+|   structure.txt
+|   tailwind.config.js
+|   ку.html
+|   Новый текстовый документ.txt
+|   
+\---src
+    +---assets
+    |   +---components
+    |   |       FloatingNav.js
+    |   |       Header.js
+    |   |       MobileMenu.js
+    |   |       
+    |   +---icons
+    |   |       Dobro.png
+    |   |       
+    |   \---photo
+    |           event1.jpg
+    |           event2.jpg
+    |           event3.jpg
+    |           event5.jpg
+    |           event6.jpg
+    |           event7.jpg
+    |           
+    +---pages
+    |       about.js
+    |       contacts.js
+    |       home.js
+    |       services.js
+    |       situationDetail.js
+    |       situations.js
+    |       situationsData.js
+    |       support.js
+    |       
+    +---scripts
+    |       main.js
+    |       router.js
+    |       ui.js
+    |       
+    \---styles
+            global.css
+            styles
+            
